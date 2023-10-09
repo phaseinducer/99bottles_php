@@ -1,8 +1,13 @@
 <?php
 
-require __DIR__ . "/../lib/Bottles.php";
+declare(strict_types=1);
 
-class BottlesTest extends \PHPUnit\Framework\TestCase {
+namespace NinetyNineBottles\Test;
+
+use NinetyNineBottles\Bottles;
+use PHPUnit\Framework\TestCase;
+
+class BottlesTest extends TestCase {
   public function test_the_first_verse() {
     $expected =
       "99 bottles of beer on the wall, " .
