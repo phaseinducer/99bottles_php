@@ -1,0 +1,23 @@
+version: '3.4'
+
+x-default-php-env-vars: &default-php-env-vars
+  PHP_CONF_DISPLAY_ERRORS: 1
+  PHP_CONF_DISPLAY_STARTUP_ERRORS: 1
+  PHP_CONF_ERROR_REPORTING: 32767
+  PHP_CONF_OPCACHE_VALIDATE_TIMESTAMP: 1
+  PHP_CONF_ZEND_ASSERTIONS: 1
+
+services:
+  php:
+    build:
+      context: '.'
+    environment:
+      <<: *default-php-env-vars
+      COMPOSER_CACHE_DIR: '/home/composer/.cache/composer'
+      COMPOSER_HOME: '/home/composer/.config/composer'
+    user: '${HOST_USER_IDS:-1000:1000}'
+    volumes:
+      - '.:/srv/app:rw'
+      - '${HOST_COMPOSER_CACHE_DIR:-~/.cache/composer}:/home/composer/.cache/composer'
+      - '${HOST_COMPOSER_HOME:-~/.config/composer}:/home/composer/.config/composer'
+    working_dir: '/srv/app'
